@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exide CSR Mapping | Akkshhej Rawatt</title>
+    
+    <!-- Premium Serif Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #D9261C; /* Exide Red */
+            --primary-glow: #ff4d4d;
+            --secondary: #0A1FB3; /* Exide Blue */
+            --secondary-glow: #4d79ff;
+            --dark: #0a0a0a;
+            --card-bg: #141414;
+            --text-main: #f0f0f0;
+            --text-muted: #a0a0a0;
+            
+            /* SDG Colors */
+            --sdg3: #4C9F38; --sdg4: #C5192D; --sdg6: #26BDE2;
+            --sdg8: #A21942; --sdg12: #BF8B2E; --sdg13: #3F7E44; --sdg15: #56C02B;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+        /* --- BACKGROUND ANIMATION --- */
+        .bg-animation {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at top center, #1a1a1a 0%, #000 100%);
+        }
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+        .orb-1 { width: 800px; height: 800px; background: var(--secondary); top: -200px; left: -200px; }
+        .orb-2 { width: 600px; height: 600px; background: var(--primary); bottom: -100px; right: -100px; animation-delay: -5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 50px); }
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 25px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+        .nav-logo { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.6rem; letter-spacing: 1px; }
+        .nav-logo span { color: var(--primary); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: flex-start; 
+            align-items: center; 
+            text-align: center; 
+            padding: 140px 20px 40px 20px;
+        }
+
+        /* LOGO CONTAINER - ZERO PADDING FIX */
+        .upes-logo-container {
+            background: rgba(255,255,255,0.95); 
+            padding: 5px 15px; /* Minimized padding */
+            border-radius: 8px; 
+            margin-bottom: 40px;
+            box-shadow: 0 0 60px rgba(255,255,255,0.2);
+            animation: fadeInDown 1s ease-out;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            z-index: 10;
+            /* Ensure container hugs the image */
+            width: fit-content;
+        }
+        
+        /* Image Hotlink Fix */
+        .upes-logo-container img { 
+            height: 95px; 
+            width: auto; 
+            display: block; 
+            /* Remove any default spacing */
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 4.5rem; margin-bottom: 10px; line-height: 1.1;
+            background: linear-gradient(to bottom right, #fff 30%, #888);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+            letter-spacing: -1px;
+            transition: all 0.5s ease;
+            cursor: default;
+        }
+
+        h1:hover {
+            background: linear-gradient(to bottom right, var(--primary), #ff8888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(217, 38, 28, 0.4);
+            transform: scale(1.02);
+        }
+
+        .hero-subtitle {
+            font-size: 1.6rem; color: var(--primary); margin-bottom: 60px;
+            font-style: italic; letter-spacing: 1px;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+            text-shadow: 0 0 30px rgba(217, 38, 28, 0.4);
+        }
+
+        /* --- INTERACTIVE STUDENT CARD --- */
+        .student-card {
+            background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px; border-radius: 8px;
+            text-align: left; max-width: 650px; width: 100%;
+            position: relative; animation: fadeInUp 1s ease-out 0.9s backwards;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        
+        .student-info p { 
+            margin: 10px 0; padding: 12px 20px; 
+            font-size: 1.15rem; color: #d0d0d0; 
+            display: flex; justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+            border-radius: 6px; transition: all 0.3s ease; cursor: default;
+        }
+
+        .student-info p:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(10px);
+            border-left: 3px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .student-info strong { 
+            color: #fff; font-weight: 600; font-family: 'Playfair Display', serif; letter-spacing: 0.5px; 
+        }
+
+        .student-info span {
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .student-info p:hover span {
+            color: var(--primary);
+            text-shadow: 0 0 15px rgba(217, 38, 28, 0.6);
+            font-weight: 500;
+        }
+
+        /* --- SECTIONS --- */
+        section { padding: 120px 12%; }
+        .section-title {
+            font-size: 3rem; margin-bottom: 60px; color: white;
+            position: relative; display: inline-block;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            cursor: default;
+        }
+        .section-title::after {
+            content: ''; position: absolute; left: 0; bottom: -10px;
+            width: 60px; height: 4px; background: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+        
+        .section-title:hover {
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(217, 38, 28, 0.6);
+        }
+
+        .intro-text {
+            font-size: 1.3rem; color: #ccc; text-align: justify; margin-bottom: 60px;
+            line-height: 1.9; font-weight: 300;
+        }
+
+        /* --- PILLARS --- */
+        .pillars-grid {
+            display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;
+        }
+        .pillar {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 18px 35px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff; font-weight: 500; font-family: 'Lora', serif; font-style: italic;
+            font-size: 1.1rem; cursor: default; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(5px);
+        }
+        .pillar::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, var(--primary), #ff6b6b);
+            opacity: 0; z-index: -1; transition: opacity 0.4s ease;
+        }
+        .pillar:hover {
+            transform: translateY(-5px) scale(1.05); border-color: transparent;
+            box-shadow: 0 10px 30px rgba(217, 38, 28, 0.4);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .pillar:hover::before { opacity: 1; }
+        .pillar.blue:hover { box-shadow: 0 10px 30px rgba(10, 31, 179, 0.5); }
+        .pillar.blue::before { background: linear-gradient(45deg, var(--secondary), #4d79ff); }
+
+        /* --- INITIATIVES CARDS --- */
+        .initiatives-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            position: relative;
+            background: rgba(30, 30, 30, 0.4); backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px; padding: 40px;
+            overflow: hidden; transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+
+        .card::before {
+            content: ""; position: absolute; inset: 0; border-radius: 12px; padding: 2px; 
+            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.3), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude;
+            opacity: 0.3; transition: opacity 0.5s;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(40, 40, 40, 0.6);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(217, 38, 28, 0.3);
+        }
+
+        .card:hover::before { opacity: 1; background: linear-gradient(135deg, var(--primary), transparent, var(--secondary)); }
+
+        .card-header {
+            font-family: 'Playfair Display', serif; font-size: 1.8rem; color: white;
+            margin-bottom: 20px; position: relative; z-index: 2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            transition: color 0.3s ease;
+        }
+        
+        .card:hover .card-header {
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(217, 38, 28, 0.5);
+        }
+
+        .card-body {
+            font-size: 1.15rem; color: #ccc; line-height: 1.7; position: relative; z-index: 2;
+        }
+
+        .card-number {
+            position: absolute; top: -20px; right: 20px; font-size: 8rem; font-weight: 900;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            z-index: 1; pointer-events: none; transition: transform 0.5s;
+        }
+
+        .card:hover .card-number {
+            transform: translateY(-10px) scale(1.1);
+            background: linear-gradient(to bottom, var(--primary), transparent);
+            -webkit-background-clip: text; opacity: 0.2;
+        }
+
+        /* --- SDG MAPPING --- */
+        .sdg-row {
+            display: flex; background: #121212; border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 25px; transition: 0.3s; border-left: 4px solid transparent;
+        }
+        .sdg-row:hover { transform: translateX(10px); background: #181818; }
+        
+        .sdg-visual {
+            width: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: white; font-weight: 800; font-family: sans-serif; font-size: 1.2rem;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .sdg-text { padding: 35px; flex: 1; }
+        .sdg-text h4 { 
+            font-size: 1.4rem; margin-bottom: 15px; color: white; 
+            transition: color 0.3s ease;
+        }
+        
+        .sdg-row:hover .sdg-text h4 {
+            color: var(--primary);
+            text-shadow: 0 0 15px rgba(217, 38, 28, 0.4);
+        }
+        
+        .sdg-text p { font-size: 1.1rem; color: #bbb; }
+
+        .row-12 { border-left-color: var(--sdg12); } .icon-12 { background: var(--sdg12); }
+        .row-6 { border-left-color: var(--sdg6); } .icon-6 { background: var(--sdg6); }
+        .row-15 { border-left-color: var(--sdg15); } .icon-15 { background: var(--sdg15); }
+        .row-8 { border-left-color: var(--sdg8); } .icon-8 { background: var(--sdg8); }
+
+        /* --- REFLECTION (INTERACTIVE) --- */
+        .reflection-box {
+            position: relative; padding: 60px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        .reflection-box:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            background: linear-gradient(180deg, rgba(217, 38, 28, 0.08), transparent);
+            box-shadow: 0 20px 50px rgba(217, 38, 28, 0.15);
+        }
+
+        .reflection-box::before {
+            content: '“'; position: absolute; top: -20px; left: 40px;
+            font-size: 10rem; color: var(--primary); opacity: 0.1; 
+            font-family: serif; transition: all 0.5s ease;
+        }
+
+        .reflection-box:hover::before {
+            opacity: 0.3;
+            transform: translateY(-10px) rotate(-10deg);
+            color: var(--primary-glow);
+        }
+
+        /* --- REFERENCES --- */
+        .ref-list li {
+            padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #888; transition: 0.3s;
+        }
+        .ref-list li:hover { color: white; padding-left: 10px; }
+
+        /* --- ANIMATIONS --- */
+        .hidden { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.22, 1, 0.36, 1); }
+        .show { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeInDown { from { opacity:0; transform:translateY(-40px); } to { opacity:1; transform:translateY(0); } }
+
+        /* =========================================
+           PRINT MODE (Academic Standard)
+           ========================================= */
+        @media print {
+            body { background: white; color: black; font-family: 'Times New Roman', Times, serif; font-size: 12pt; }
+            .bg-animation, nav, .pillar, button { display: none !important; }
+            .hero { min-height: auto; display: block; padding: 0; page-break-after: always; }
+            .upes-logo-container { box-shadow: none; background: none; padding: 0; margin-bottom: 20px; text-align: center; }
+            
+            /* HOTLINK LOGO PRINT FIX */
+            .upes-logo-container img { height: 80px !important; width: auto !important; margin: 0 auto; display: block; }
+            
+            h1 { color: black; font-size: 24pt; background: none; -webkit-text-fill-color: black; margin: 30px 0; transition: none; }
+            .hero-subtitle { color: #333; font-size: 16pt; text-shadow: none; }
+            
+            .student-card { background: none; border: 2px solid black; color: black; box-shadow: none; margin: 0 auto; padding: 20px; }
+            .student-info p { color: black; border-bottom: 1px solid #eee; justify-content: flex-start; padding: 5px 0; }
+            .student-info strong { color: black; margin-right: 20px; width: 150px; }
+            .student-info p:hover { background: none; transform: none; border: none; box-shadow: none; }
+            .student-info p:hover span { color: black; text-shadow: none; }
+            .reflection-box:hover { transform: none; border: none; background: none; box-shadow: none; }
+            
+            section { padding: 0; margin: 30px 0; page-break-inside: avoid; }
+            .section-title { font-size: 18pt; color: black; border-bottom: 1px solid black; display: block; width: 100%; margin-bottom: 20px; transition: none; }
+            .section-title::after { display: none; }
+            .intro-text { color: black; font-size: 12pt; text-align: justify; margin-bottom: 20px; }
+            .pillars-grid { display: none; }
+            .initiatives-grid { display: block; }
+            .card { border: none; background: none; margin-bottom: 20px; box-shadow: none; transform: none !important; }
+            .card-header { background: none; color: black; padding: 0; border-bottom: none; font-size: 14pt; font-weight: bold; transition: none; }
+            .card-body { padding: 5px 0 0 0; color: black; font-size: 12pt; }
+            .card-number { display: none; }
+            .sdg-container { display: block; }
+            .sdg-row { display: flex; border: 1px solid #ccc; background: none; margin-bottom: 15px; page-break-inside: avoid; }
+            .sdg-visual { width: 20%; border-right: 1px solid #ccc; color: black; background: #f0f0f0 !important; font-size: 10pt; }
+            .sdg-text { width: 80%; padding: 15px; color: black; }
+            .sdg-text h4 { color: black; font-weight: bold; font-size: 12pt; transition: none; }
+            .sdg-text p { color: black; font-size: 11pt; }
+            .reflection-box { background: none; border: none; padding: 0; color: black; font-size: 12pt; }
+            .reflection-box::before { display: none; }
+            .ref-list li { color: black; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <nav>
+        <div class="nav-logo">EXIDE <span>CSR</span></div>
+        <div style="font-size: 0.9rem; color: #ccc;">Submitted to: Prof. Prasomee Sikdar</div>
+    </nav>
+
+    <!-- COVER PAGE -->
+    <div class="hero">
+        <div class="upes-logo-container">
+            <!-- YOUR HOSTED IMAGE (IMGBB LINK) -->
+            <img src="https://i.ibb.co/7drwwn6R/11021355.jpg" alt="UPES Logo">
+        </div>
+        
+        <h1>CSR–SDG MAPPING</h1>
+        <div class="hero-subtitle">Organization: Exide Industries Limited (India)</div>
+
+        <!-- Interactive Student Card -->
+        <div class="student-card">
+            <div class="student-info">
+                <p><strong>Student Name:</strong> <span>Akkshhej Rawatt</span></p>
+                <p><strong>Sap Id:</strong> <span>590016585</span></p>
+                <p><strong>Course:</strong> <span>BBA (Digital Business)</span></p>
+                <p><strong>Semester:</strong> <span>2nd Year / 3rd Semester</span></p>
+                <p><strong>Date:</strong> <span>22th November 2025</span></p>
+                <p><strong>Submitted to:</strong> <span>Prof. Prasomee Sikdar</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTRODUCTION -->
+    <section id="intro">
+        <h2 class="section-title">1. Introduction</h2>
+        <div class="intro-text hidden">
+            Exide Industries Limited is India’s largest manufacturer of lead-acid storage batteries and power electronics (inverters/UPS). Unlike service-sector companies where CSR is often purely philanthropic, Exide’s approach is deeply tied to <strong>material stewardship</strong>. Dealing with lead—a highly toxic heavy metal—places a unique responsibility on the organization to manage its product lifecycle to prevent environmental contamination.
+            <br><br>
+            Exide’s CSR philosophy is operationalized through five core pillars. The company has integrated these pillars into a business strategy that prioritizes a "Circular Economy." By formalizing the recycling of used batteries, Exide not only secures raw materials but also mitigates the severe public health risks posed by the informal, unregulated lead smelting sector in India.
+        </div>
+        
+        <div class="pillars-grid hidden">
+            <div class="pillar">Exide Akshar</div>
+            <div class="pillar blue">Exide Aarogya</div>
+            <div class="pillar">Exide Paryavaran</div>
+            <div class="pillar blue">Exide Kaushal</div>
+            <div class="pillar">Exide Saksham</div>
+        </div>
+    </section>
+
+    <!-- INITIATIVES -->
+    <section id="initiatives">
+        <h2 class="section-title">2. CSR Initiatives</h2>
+        <div class="initiatives-grid">
+            <!-- 1 -->
+            <div class="card hidden">
+                <div class="card-number">01</div>
+                <div class="card-header">Lead Battery Recycling</div>
+                <div class="card-body">
+                    This is Exide’s flagship environmental initiative. The company operates state-of-the-art smelting and recycling units (e.g., in Pune, Bangalore, and Kolkata) that recover over 99% of lead and plastics from used batteries. By purchasing old batteries from customers and recycling them in controlled facilities, Exide prevents them from reaching "backyard smelters" that pollute soil and groundwater. Currently, approximately 60-70% of the lead used in new Exide batteries comes from recycled sources.
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="card hidden" style="transition-delay: 0.1s">
+                <div class="card-number">02</div>
+                <div class="card-header">Project Exide Akshar</div>
+                <div class="card-body">
+                    Targeting the "learning gap" in government schools, this initiative provides remedial education and infrastructure support. A key highlight is the "School Transformation" program in partnership with organizations like Yuva Unstoppable, which has upgraded sanitation, smart classrooms, and drinking water facilities in over 115 schools. It also includes the "Exide Merit Scholarship" for students from marginalized communities.
+                </div>
+            </div>
+            <!-- 3 -->
+            <div class="card hidden" style="transition-delay: 0.2s">
+                <div class="card-number">03</div>
+                <div class="card-header">WASH Program</div>
+                <div class="card-body">
+                    In partnership with UNICEF, Exide has implemented extensive WASH interventions in West Bengal and Bihar. The program focuses on constructing gender-segregated toilets and handwashing stations in rural schools. This is a strategic intervention to reduce female dropout rates, as adolescent girls often leave school due to a lack of private sanitation facilities during menstruation.
+                </div>
+            </div>
+            <!-- 4 -->
+            <div class="card hidden" style="transition-delay: 0.3s">
+                <div class="card-number">04</div>
+                <div class="card-header">Exide Paryavaran</div>
+                <div class="card-body">
+                    Recognizing the water intensity of manufacturing, Exide has undertaken water conservation projects in water-stressed regions like Bawal (Haryana) and Ahmednagar. The initiative involves desilting and restoring village ponds to enhance groundwater recharge. These rejuvenated water bodies now support local agriculture and biodiversity, benefiting over 50,000 households and facilitating the annual recharge of over 17,500 cubic meters of water.
+                </div>
+            </div>
+            <!-- 5 -->
+            <div class="card hidden" style="transition-delay: 0.4s">
+                <div class="card-number">05</div>
+                <div class="card-header">Exide Kaushal</div>
+                <div class="card-body">
+                    This initiative focuses on enhancing employability for youth living near Exide’s manufacturing plants. A standout component is the technical training provided to differently-abled youth (Pokedh), achieving a 75% employment rate for program graduates. It also includes vocational training for automotive technicians, ensuring a skilled workforce for the broader auto-ancillary sector.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAPPING -->
+    <section id="mapping">
+        <h2 class="section-title">3. SDG Mapping</h2>
+        <div class="sdg-container">
+            
+            <!-- Row 1 -->
+            <div class="sdg-row row-12 hidden">
+                <div class="sdg-visual icon-12">
+                    <div style="font-size:3rem;">12</div>
+                    <div>Consumption</div>
+                    <div style="margin-top:10px; font-size:0.8rem; opacity:0.8;">+ SDG 3</div>
+                </div>
+                <div class="sdg-text">
+                    <h4>Lead Battery Recycling</h4>
+                    <p><strong>SDG 12: Responsible Consumption & Production</strong> - By recovering 99% of materials from old batteries, Exide creates a closed-loop system (Circular Economy), directly addressing Target 12.5 (reduce waste generation through recycling).<br><br>
+                    <strong>SDG 3: Good Health & Well-being</strong> - Proper recycling prevents toxic lead from poisoning local communities, supporting Target 3.9 (reduce deaths/illnesses from hazardous chemicals and soil pollution).</p>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="sdg-row row-6 hidden">
+                <div class="sdg-visual icon-6">
+                    <div style="font-size:3rem;">6</div>
+                    <div>Clean Water</div>
+                    <div style="margin-top:10px; font-size:0.8rem; opacity:0.8;">+ SDG 4</div>
+                </div>
+                <div class="sdg-text">
+                    <h4>WASH Program (UNICEF)</h4>
+                    <p><strong>SDG 6: Clean Water & Sanitation</strong> - The construction of school toilets and water stations directly contributes to Target 6.2 (access to adequate and equitable sanitation and hygiene for all).<br><br>
+                    <strong>SDG 4: Quality Education</strong> - Access to sanitation reduces school absenteeism, particularly among girls, ensuring inclusive and equitable quality education (Target 4.1).</p>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="sdg-row row-15 hidden">
+                <div class="sdg-visual icon-15">
+                    <div style="font-size:3rem;">15</div>
+                    <div>Life on Land</div>
+                    <div style="margin-top:10px; font-size:0.8rem; opacity:0.8;">+ SDG 13</div>
+                </div>
+                <div class="sdg-text">
+                    <h4>Exide Paryavaran</h4>
+                    <p><strong>SDG 15: Life on Land</strong> - Restoring village ponds preserves freshwater ecosystems and biodiversity, aligning with Target 15.1 (conservation of freshwater ecosystems).<br><br>
+                    <strong>SDG 13: Climate Action</strong> - Recharging groundwater tables builds community resilience against droughts and climate variability (Target 13.1).</p>
+                </div>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="sdg-row row-8 hidden">
+                <div class="sdg-visual icon-8">
+                    <div style="font-size:3rem;">8</div>
+                    <div>Decent Work</div>
+                </div>
+                <div class="sdg-text">
+                    <h4>Exide Kaushal</h4>
+                    <p><strong>SDG 8: Decent Work & Economic Growth</strong> - Vocational training for marginalized youth and the differently-abled leads to productive employment and economic inclusion (Target 8.5).</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- REFLECTION -->
+    <section id="reflection">
+        <h2 class="section-title">4. Reflection / Conclusion</h2>
+        <div class="reflection-box hidden">
+            <p>Exide Industries demonstrates a highly effective integration of CSR with sustainable development by focusing on "Materiality"—addressing the specific environmental hazards inherent to its business. Rather than limiting CSR to passive donations, Exide has engineered a supply chain that turns a toxic waste stream (used batteries) into a valuable resource. This transition from a linear "make-use-dispose" model to a circular one is a benchmark for heavy industries in India.</p>
+            <br>
+            <p>However, the scope could be scaled up in the consumer engagement domain. While industrial collection is robust, many household consumers still sell old inverter batteries to informal scrap dealers due to a lack of awareness. Exide could improve by launching a nationwide, app-based "Direct-to-Consumer" take-back system to ensure 100% of its consumer products return to the formal recycling stream, thereby completely eliminating lead leakage into the environment.</p>
+        </div>
+    </section>
+
+    <!-- REFERENCES -->
+    <section id="references" style="padding-bottom: 150px;">
+        <h2 class="section-title">5. References</h2>
+        <ul class="ref-list hidden">
+            <li>Exide Industries Limited. (2024). <em>Sustainability & Integrated Annual Report 2023-24</em>. Retrieved from https://www.exideindustries.com/sustainability/</li>
+            <li>Exide Industries Limited. (n.d.). <em>CSR Initiatives: Battery Recycling</em>. Exide Industries. Retrieved November 22, 2025, from https://www.exideindustries.com/sustainability/battery-recycling.aspx</li>
+            <li>UNICEF India. (2023). <em>Water, Sanitation and Hygiene (WASH): Partnerships for Impact</em>. Retrieved from https://www.unicef.org/india/what-we-do/wash</li>
+            <li>United Nations. (2015). <em>The 17 Sustainable Development Goals</em>. United Nations Department of Economic and Social Affairs. https://sdgs.un.org/goals</li>
+            <li>CSRBOX. (2024). <em>Exide Industries Limited CSR Profile and Projects</em>. Retrieved from https://csrbox.org/India_CSR_Project_Exide-Industries-Limited</li>
+        </ul>
+    </section>
+
+    <!-- Floating Print Action -->
+    <button onclick="window.print()" style="position:fixed; bottom:40px; right:40px; background:var(--primary); color:white; border:none; padding:20px; border-radius:50%; font-size:24px; cursor:pointer; box-shadow:0 10px 30px rgba(217,38,28,0.5); z-index:9999; transition: transform 0.3s;">🖨️</button>
+
+    <script>
+        // Smooth Reveal on Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
